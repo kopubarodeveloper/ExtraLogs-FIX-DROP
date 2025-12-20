@@ -3,7 +3,7 @@ modded class ActionDropItem : ActionSingleUseBase{
 	override void OnExecuteServer(ActionData action_data) {
 		super.OnExecuteServer(action_data);
 
-		// Ваши сообщения
+		
 		Print("[Yamori_DropDebug] !!! Author of the correction of the podification Yamori_ko !!!");
 		Print("[Yamori_DropDebug] !!! If my modification is fully functional, please give me a star and subscribe to my GitHub. !!!");
 		Print("[Yamori_DropDebug] !!! https://github.com/kopubarodeveloper !!!");
@@ -29,22 +29,22 @@ modded class ActionDropItem : ActionSingleUseBase{
 			return;
 		}
 		
-		// Пробуем разные способы получить предмет
+		
 		EntityAI itemObject = NULL;
 		
-		// Способ 1: Из m_MainItem (убрали каст)
+	
 		if(action_data.m_MainItem) {
-			itemObject = action_data.m_MainItem; // БЕЗ EntityAI.Cast()
+			itemObject = action_data.m_MainItem; 
 			Print("[DropDebug] Got item from m_MainItem");
 		}
 		
-		// Способ 2: Из рук игрока
+		
 		if(!itemObject) {
 			itemObject = action_data.m_Player.GetItemInHands();
 			Print("[DropDebug] Got item from GetItemInHands");
 		}
 		
-		// Способ 3: Из m_Target (здесь каст нужен)
+		
 		if(!itemObject && action_data.m_Target) {
 			itemObject = EntityAI.Cast(action_data.m_Target.GetObject());
 			Print("[DropDebug] Got item from m_Target.GetObject()");
@@ -77,7 +77,7 @@ modded class ActionDropItem : ActionSingleUseBase{
 			return;
 		}
 		
-		// Логика проверки
+		
 		if(!m_LogConfig.ServerConfig.SimpleLogsStorage){
 			Print("[DropDebug] Checking with full item details");
 			foreach(string CheckItem: m_LogConfig.CustomConfig.DropMonitorItems){
@@ -105,4 +105,5 @@ modded class ActionDropItem : ActionSingleUseBase{
 		
 		Print("[DropDebug] No matches found in DropMonitorItems");
 	}
+
 }
